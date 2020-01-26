@@ -15,8 +15,8 @@ RockPro64Case.dxf
 
 ### Parts
 
-20 #4-40 4/8 Socket Head screws
-1/4" ABS tubing (No 4 hole)
-4 Rubber Feet
+* 20 #4-40 4/8 Socket Head screws
+* 1/4" ABS tubing (No 4 hole)
+* 4 Rubber Feet
 
 
