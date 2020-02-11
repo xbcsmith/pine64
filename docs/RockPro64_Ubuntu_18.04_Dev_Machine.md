@@ -30,8 +30,11 @@ sudo usermod -aG wheel $USER
 ```
 
 ```bash
-sudo groupadd $NEWUSER
+sudo su -
+export NEWUSER=<foo>
+groupadd $NEWUSER
 useradd -m -g $NEWUSER -G wheel -s /bin/bash -d /home/$NEWUSER $NEWUSER
+passwd $NEWUSER
 ```
 
 ## Update
@@ -44,11 +47,11 @@ sudo apt upgrade
 ## Gnome
 
 ```bash
-sudo apt install tasksel
-sudo taskel
+sudo apt install vanilla-gnome-desktop
+sudo apt install gnome-shell-extension-* nautilus
+sudo update-alternatives --config gdm3.css
 ```
 
-Pick the Vanilla Gnome install
 
 
 ## GO
@@ -71,7 +74,7 @@ source $HOME/.cargo/env
 ```bash
 export ARM="armhf" ## If you are headless and using aarch64 set this to "arm64"
 sudo apt remove docker docker-engine docker.io
-sudo apt install apt-transport-https ca-certificates curl software-properties-common
+sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 sudo add-apt-repository "deb [arch=${ARM}] https://download.docker.com/linux/ubuntu $(lsb_release -cs) edge"
@@ -126,7 +129,11 @@ sudo apt install python3.7 python3.7-venv
  
 
 ```bash
-mkvirtualenv --python=$(which python3.7) foo
+mkdir -p ~/.virtualenvs
+PYTHON3=$(which python3.7)
+$PYTHON3 -m venv ~/.virtualenvs/foo
+source ~/.virtualenvs/foo/bin/activate
+
 pip install --upgrade pip setuptools pbr wheel pip pkg_resources functools32 docker
 pip install --upgrade rfc3987 enum34 PyYAML stevedore jsonschema Jinja2
 pip install --upgrade autopep8 flake8 tox black isort pdbpp
