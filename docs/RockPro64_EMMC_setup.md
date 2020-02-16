@@ -201,7 +201,7 @@ zegrep "PWM" /proc/config.gz
 
 ```bash
 sudo apt remove lua5.1 liblua5.1-dev
-sudo apt install lua5.3 lua5.3-dev luarocks
+sudo apt install lua5.3 lua5.3-dev luarocks lua-sec
 sudo update-alternatives  --install /usr/bin/lua lua-interpreter /usr/bin/lua5.3 130
 sudo update-alternatives --install /usr/bin/luac lua-compiler /usr/bin/luac5.3 130
 sudo update-alternatives --config lua-interpreter
