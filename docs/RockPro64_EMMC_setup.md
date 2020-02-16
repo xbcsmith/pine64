@@ -6,7 +6,7 @@
 grab the minimal bionic image for the rockpro64
 
 ```bash
-curl -klO https://github.com/ayufan-rock64/linux-build/releases/download/0.9.16/bionic-minimal-rockpro64-0.9.16-1163-arm64.img.xz
+curl -kLO https://github.com/ayufan-rock64/linux-build/releases/download/0.9.16/bionic-minimal-rockpro64-0.9.16-1163-arm64.img.xz
 ```
 
 Install to EMMC
