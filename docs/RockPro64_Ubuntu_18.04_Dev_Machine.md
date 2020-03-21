@@ -158,3 +158,13 @@ pip install --upgrade pip setuptools pbr wheel pip pkg_resources functools32 doc
 pip install --upgrade rfc3987 enum34 PyYAML stevedore jsonschema Jinja2
 pip install --upgrade autopep8 flake8 tox black isort pdbpp
 ```
+
+## NPM
+
+```bash
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt install nodejs yarn
+```
