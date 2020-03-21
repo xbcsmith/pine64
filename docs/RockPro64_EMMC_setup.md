@@ -20,7 +20,7 @@
 grab the minimal bionic image for the rockpro64
 
 ```bash
-curl -klO https://github.com/ayufan-rock64/linux-build/releases/download/0.9.16/bionic-minimal-rockpro64-0.9.16-1163-arm64.img.xz
+curl -kLO https://github.com/ayufan-rock64/linux-build/releases/download/0.9.16/bionic-minimal-rockpro64-0.9.16-1163-arm64.img.xz
 ```
 
 Install to EMMC
@@ -214,7 +214,7 @@ zegrep "PWM" /proc/config.gz
 
 ```bash
 sudo apt remove lua5.1 liblua5.1-dev
-sudo apt install lua5.3-dev
+sudo apt install lua5.3 lua5.3-dev luarocks lua-sec
 sudo update-alternatives  --install /usr/bin/lua lua-interpreter /usr/bin/lua5.3 130
 sudo update-alternatives --install /usr/bin/luac lua-compiler /usr/bin/luac5.3 130
 sudo update-alternatives --config lua-interpreter
