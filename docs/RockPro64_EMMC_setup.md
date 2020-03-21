@@ -1,7 +1,21 @@
 # RockPro64 arm64 EMMC Setup
 
-## Start
+- [Start](#start)
+- [Editor](#editor)
+- [Sudo](#sudo)
+- [Update](#update)
+- [Update /etc/issue](#update-etcissue)
+- [Gnome](#gnome)
+- [Dev Tools](#dev-tools)
+- [Build Tools](#build-tools)
+- [GO](#go)
+- [Rust](#rust)
+- [Docker](#docker)
+- [Python](#python)
+- [NPM](#npm)
+- [ATS](#ats)
 
+## Start
 
 grab the minimal bionic image for the rockpro64
 
@@ -12,14 +26,13 @@ curl -klO https://github.com/ayufan-rock64/linux-build/releases/download/0.9.16/
 Install to EMMC
 
 ```bash
-xzcat bionic-minimal-rockpro64-0.9.16-1163-arm64.img.xz | sudo dd bs=4M of=/dev/mmcblk1 iflag=fullblock oflag=direct status=progress
+xzcat bionic-minimal-rockpro64-0.9.16-1163-arm64.img.xz | \
+    sudo dd bs=4M of=/dev/mmcblk1 iflag=fullblock oflag=direct status=progress
 ```
 
+## Editor
 
-
-## EDITOR
-
-### Always vim
+**Always vim**
 
 ```
 sudo update-alternatives --config editor
@@ -60,8 +73,16 @@ sudo mv /etc/apt/trusted.gpg.d/ayufan.key.chroot.gpg .
 sudo apt update
 sudo apt upgrade
 ```
- 
-## Install Vanilla Gnome 3
+
+## Update /etc/issue
+
+Display the IP address
+
+```bash
+echo -en "IP: \4\n" >> /etc/issue
+```
+
+## Gnome
 
 ```bash
 sudo apt update
@@ -69,22 +90,6 @@ sudo apt install vanilla-gnome-desktop
 sudo apt install gnome-shell-extension-* nautilus
 sudo update-alternatives --config gdm3.css
 ```
-
-## GO
-
-```
-sudo add-apt-repository ppa:longsleep/golang-backports
-sudo apt-get update
-sudo apt-get install golang-go
-```
-
-## Rust
-
-```
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
-```
-
 
 ## Dev tools
 
@@ -96,12 +101,27 @@ sudo apt install retext gedit
 
 ## Build Tools
 
-```bash 
+```bash
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 sudo apt update
 sudo apt install gcc-5 g++-5 build-essential git libsecret-1-dev fakeroot rpm libx11-dev libxkbfile-dev
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 80 --slave /usr/bin/g++ g++ /usr/bin/g++-5
 sudo update-alternatives --config gcc # choose gcc-5 from the list
+```
+
+## GO
+
+```bash
+sudo add-apt-repository ppa:longsleep/golang-backports
+sudo apt-get update
+sudo apt-get install golang-go
+```
+
+## Rust
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
 ```
 
 ## Docker
@@ -136,7 +156,6 @@ sed -i 's~dockerd -H fd://~dockerd~g' /lib/systemd/system/docker.service
 sed -i 's~StartLimitInterval=60s~StartLimitInterval=60s\nIPForward=yes\n~g' /lib/systemd/system/docker.service
 ```
 
-
 ```bash
 sudo groupadd docker
 sudo usermod -aG docker $USER
@@ -148,8 +167,6 @@ sudo systemctl start docker.service
 ```bash
 docker run --rm -it hello-world
 ```
-
-
 
 ## Python
 
@@ -168,9 +185,7 @@ sudo update-alternatives --set python3 /usr/bin/python3.6
 sudo apt-get install --reinstall python3-apt
 ```
 
-## NPM and Yarn
-
-### NPM
+## NPM
 
 ```bash
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
@@ -180,20 +195,18 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt install nodejs yarn
 ```
 
-
 ## Atom
 
 ### Not Working
 
-https://flight-manual.atom.io/hacking-atom/sections/hacking-on-atom-core/#platform-linux
+<https://flight-manual.atom.io/hacking-atom/sections/hacking-on-atom-core/#platform-linux>
 
 ```bash
 mkdir -p git/github.com/atom
 git clone https://github.com/atom/atom.git
 ```
 
-
-## Install ATS
+## ATS
 
 ```bash
 zegrep "PWM" /proc/config.gz
@@ -221,14 +234,6 @@ MIN_PWM = 30
 
 ALWAYS_ON = true
 
-
 ```bash
 sudo systemctl restart ats
 ```
-
-
-
-
-
-
-

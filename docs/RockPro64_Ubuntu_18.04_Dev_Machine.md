@@ -1,11 +1,21 @@
 # Ubuntu 18.04 Dev Machine
 
+- [Editor](#Editor)
+- [Sudo](#sudo)
+- [Update](#update)
+- [Update /etc/issue](#update-etcissue)
+- [Gnome](#gnome)
+- [GO](#go)
+- [Rust](#rust)
+- [Docker](#docker)
+- [Devel Pkgs](#devel-pkgs)
+- [Virtual Env](#virtual-env)
 
-## EDITOR
+## Editor
 
-### Always vim
+**Always vim**
 
-```
+```bash
 sudo update-alternatives --config editor
 ```
 
@@ -16,8 +26,7 @@ sudo visudo
 ```
 
 ```bash
-# Allow member of wheel to do stupid things
-%wheel  ALL=(ALL)       NOPASSWD: ALL
+%wheel  ALL=(ALL)       NOPASSWD: ALL # Allow member of wheel to do stupid things
 ```
 
 ```bash
@@ -40,8 +49,17 @@ passwd $NEWUSER
 ## Update
 
 ```bash
+sudo mv /etc/apt/trusted.gpg.d/ayufan.key.chroot.gpg .
 sudo apt update
 sudo apt upgrade
+```
+
+## Update /etc/issue
+
+Display the IP address
+
+```bash
+echo -en "IP: \4\n" >> /etc/issue
 ```
 
 ## Gnome
@@ -51,8 +69,6 @@ sudo apt install vanilla-gnome-desktop
 sudo apt install gnome-shell-extension-* nautilus
 sudo update-alternatives --config gdm3.css
 ```
-
-
 
 ## GO
 
@@ -69,7 +85,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 ```
 
-## Docker 
+## Docker
 
 ```bash
 export ARM="armhf" ## If you are headless and using aarch64 set this to "arm64"
@@ -99,7 +115,6 @@ sed -i 's~dockerd -H fd://~dockerd~g' /lib/systemd/system/docker.service
 sed -i 's~StartLimitInterval=60s~StartLimitInterval=60s\nIPForward=yes\n~g' /lib/systemd/system/docker.service
 ```
 
-
 ```bash
 sudo groupadd docker
 sudo usermod -aG docker $USER
@@ -115,7 +130,14 @@ docker run --rm -it hello-world
 ## Devel Pkgs
 
 ```bash
-sudo apt -y update && sudo apt -y install build-essential devscripts fakeroot debhelper dpkg-dev automake autotools-dev autoconf libtool perl libperl-dev systemtap-sdt-dev libssl-dev python-dev python3-dev m4 bison flex opensp xsltproc gettext unzip wget libguestfs-tools virtualenvwrapper tox python3-virtualenv openjdk-8-jre-headless openjdk-8-jdk-headless pkg-config python-logilab-common python-unittest2 python-mock zip python-autopep8 python3-flake8 flake8 python-flake8 isort python-isort python3-isort vim-autopep8 python-wheel python3-wheel python-pip python3-pip tox 
+sudo apt -y update && sudo apt -y install build-essential devscripts fakeroot \
+  debhelper dpkg-dev automake autotools-dev autoconf libtool perl libperl-dev \
+  systemtap-sdt-dev libssl-dev python-dev python3-dev m4 bison flex opensp \
+  xsltproc gettext unzip wget libguestfs-tools virtualenvwrapper tox \
+  python3-virtualenv openjdk-8-jre-headless openjdk-8-jdk-headless pkg-config \
+  python-logilab-common python-unittest2 python-mock zip python-autopep8 \
+  python3-flake8 flake8 python-flake8 isort python-isort python3-isort \
+  vim-autopep8 python-wheel python3-wheel python-pip python3-pip tox
 ```
 
 ```bash
@@ -124,9 +146,7 @@ sudo apt update
 sudo apt install python3.7 python3.7-venv
 ```
 
-
 ## Virtual Env
- 
 
 ```bash
 mkdir -p ~/.virtualenvs
@@ -138,5 +158,3 @@ pip install --upgrade pip setuptools pbr wheel pip pkg_resources functools32 doc
 pip install --upgrade rfc3987 enum34 PyYAML stevedore jsonschema Jinja2
 pip install --upgrade autopep8 flake8 tox black isort pdbpp
 ```
-
-
