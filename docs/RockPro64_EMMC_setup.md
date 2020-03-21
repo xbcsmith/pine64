@@ -32,9 +32,9 @@ xzcat bionic-minimal-rockpro64-0.9.16-1163-arm64.img.xz | \
 
 ## Editor
 
-**Always vim**
+_Always **vim**_
 
-```
+```bash
 sudo update-alternatives --config editor
 ```
 
@@ -224,15 +224,13 @@ sudo luarocks build https://raw.githubusercontent.com/tuxd3v/ats/master/ats-mast
 
 Edit `/etc/ats.conf`
 
+```bash
 MAX_CONTINOUS_TERMAL_TEMP = 60
-
 MIN_CONTINOUS_TERMAL_TEMP = 35
-
 MAX_PWM = 255
-
 MIN_PWM = 30
-
 ALWAYS_ON = true
+```
 
 ```bash
 sudo systemctl restart ats

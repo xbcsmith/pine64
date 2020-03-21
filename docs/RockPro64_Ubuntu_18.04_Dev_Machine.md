@@ -13,7 +13,7 @@
 
 ## Editor
 
-**Always vim**
+_Always **vim**_
 
 ```bash
 sudo update-alternatives --config editor
