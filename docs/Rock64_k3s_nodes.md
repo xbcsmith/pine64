@@ -101,7 +101,9 @@ EOF
 chmod +x change_mac.sh
 ```
 
+```bash
 cat /boot/extlinux/extlinux.conf
+```
 
 mac_addr=1e:8f:b5:c3:48:d4
 
@@ -153,7 +155,7 @@ sudo apt -y upgrade
 
 ## #
 
-kubeconfig file is written to /etc/rancher/k3s/k3s.yaml
+kubeconfig file is written to `/etc/rancher/k3s/k3s.yaml`
 
 ```bash
 curl -sfL https://get.k3s.io | sh -
@@ -198,9 +200,11 @@ kubectl label node rock64-green node-role.kubernetes.io/worker=worker
 kubectl label node rock64-blue node-role.kubernetes.io/worker=worker
 ```
 
-Duplicate entries ... on server
+Duplicate entries ... on the server remove the hostname:password
+from /var/lib/rancher/k3s/server/cred/node-passwd
 
-remove the hostname:password from /var/lib/rancher/k3s/server/cred/node-passwd
+
+## Dashboard
 
 ```bash
 GITHUB_URL=https://github.com/kubernetes/dashboard/releases
@@ -241,7 +245,12 @@ sudo k3s kubectl -n kubernetes-dashboard describe secret admin-user-token | grep
 sudo k3s kubectl proxy
 ```
 
+URL should be something like this
+
 <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/>
+
+
+## Lens
 
 <https://github.com/lensapp/lens>
 
