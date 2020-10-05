@@ -1,0 +1,15 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: docker-registry
+  namespace: kube-system
+spec:
+  chart: stable/docker-registry
+  targetNamespace: kube-system
+  valuesContent: |-
+    service:
+      name: registry
+      type: LoadBalancer
+    persistence:
+      enabled: true
+    tlsSecretName: registry-ingress-tls

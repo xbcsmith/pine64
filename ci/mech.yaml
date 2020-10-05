@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mechserver-deployment
+  namespace: mechserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mechserver
+  template:
+    metadata:
+      labels:
+        app: mechserver
+    spec:
+      containers:
+        - name: mechserver
+          image: "docker.uniblick.io:5000/mechserver:1.0.0-arm64"
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 100m
+            limits:
+              memory: 128Mi
+              cpu: 500m
+          ports:
+            - containerPort: 9999
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mechserver-service
+  namespace: mechserver
+spec:
+  ports:
+    - port: 80
+      targetPort: 9999
+      name: tcp
+  selector:
+    app: mechserver
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: mechserver-ingress
+  namespace: mechserver
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    - host: mechserv.uniblick.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mechserver-service
+              servicePort: 80
